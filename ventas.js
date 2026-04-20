@@ -9,8 +9,31 @@ function calcularComision(numeroVentas,precioProducto){
     return comision
 }
 
-function calcular(){
+function validarInput(idInput, idMensaje) {
+    let input = document.getElementById(idInput);
+    let spanMensaje = document.getElementById(idMensaje);
     
+    let valor = input.value.trim();
+    spanMensaje.textContent = "";
+    spanMensaje.style.color = "#ef4444";
+    spanMensaje.style.fontSize = "13px";
+    spanMensaje.style.display = "block";
+    if (valor === "") {
+        spanMensaje.textContent = "Este campo no puede estar vacío.";
+        return;
+    }
+    let soloNumeros = /^[0-9]+$/; 
+    if (!soloNumeros.test(valor)) {
+        spanMensaje.textContent = "Error: Por favor, ingresa solo números.";
+        return; 
+    }
+    if (valor.length > 5) {
+        spanMensaje.textContent = "Alerta: Has sobrepasado el número máximo de 5 caracteres.";
+        return; 
+    }
+}
+
+function calcular(){
     let sueldoBase=recuperarTxtAFloat("txtSueldoBase");
     let ventas=recuperarTxtAFloat("txtVentas");
     let precio=recuperarTxtAFloat("txtPrecio");
